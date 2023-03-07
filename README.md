@@ -1,0 +1,52 @@
+# Levenshtein Distance Word Search
+
+This is a Python utility for searching all dictionary words and comparing them to a user input string using the Levenshtein distance algorithm. It returns a list of full words that are within a certain distance from the input string.
+
+## Requirements
+
+- Python 3.6 or later
+- `pandas` and `polars` libraries
+- English dictionary file in CSV or Parquet format
+
+## Installation
+
+1. Clone the repository
+2. Install the required libraries with `pip install -r requirements.txt`
+3. Download the English dictionary file in either CSV or Parquet format and place it in the `data/` directory. You can use the following dictionary source:"https://raw.githubusercontent.com/dwyl/english-words/master/words.txt"
+
+
+
+## Usage
+
+1. Import the `LevenshteinSearch` class:
+
+```python
+from levenshtein_search import LevenshteinSearch
+
+#Create an instance of the LevenshteinSearch class by passing the path to the English dictionary file:
+ls = LevenshteinSearch("data/english_dictionary.parquet")
+
+#Call the search method of the LevenshteinSearch object, passing the user input string and the maximum Levenshtein distance allowed:
+input_str = input("Enter a word: ")
+max_distance = int(input("Enter a maximum Levenshtein distance: "))
+results = ls.search(input_str, max_distance)
+#The search method returns a list of full words that are within the maximum Levenshtein distance from the input string.
+
+#To save the results to a text file, call the save_results_to_txt method of the LevenshteinSearch object, passing the results list and the output file path:
+ls.save_results_to_txt(results, "data/results.txt")
+```
+## Example
+Here's an example usage of the LevenshteinSearch class:
+```python
+from levenshtein_search import LevenshteinSearch
+
+ls = LevenshteinSearch("data/english_dictionary.parquet")
+
+input_str = "potato"
+max_distance = 2
+
+results = ls.search(input_str, max_distance)
+
+ls.save_results_to_txt(results, "data/results.txt")
+```
+This will search for words in the English dictionary file that are within a Levenshtein distance of 2 from the input string "potato", and save the results to the file data/results.txt.
