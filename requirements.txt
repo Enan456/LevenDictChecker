@@ -1,0 +1,2 @@
+pandas == 1.5.3
+Levenshtein == 0.20.9
